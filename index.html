@@ -6,88 +6,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>Simple Material Site</title>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-		<style>
-			:root{
-				--bg:#f6f8fb;
-				--card:#ffffff;
-				--primary:#6750A4;
-				--accent:#00BFA6;
-				--muted:#6b7280;
-				--shadow: 0 4px 12px rgba(16,24,40,0.08);
-			}
-			*{box-sizing:border-box}
-			html,body{height:100%}
-			body{
-				margin:0;
-				font-family:Inter,system-ui,Arial,Helvetica,sans-serif;
-				background:linear-gradient(180deg,var(--bg),#ffffff);
-				color:#0f172a;
-				-webkit-font-smoothing:antialiased;
-				-moz-osx-font-smoothing:grayscale;
-				display:flex;  
-				flex-direction:column;
-			}
-			header{
-				padding:28px 20px 6px;
-				display:flex;
-				align-items:flex-start;
-				gap:14px;
-			}
-			.avatar{
-				width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#7c5ad4);
-				display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;
-				box-shadow:var(--shadow);
-			}
-			.greeting{flex:1}
-			.greeting h1{margin:0;font-size:20px;font-weight:700}
-			.greeting p{margin:4px 0 0;color:var(--muted);font-size:14px}
-
-			main{padding:20px;flex:1;display:flex;flex-direction:column;gap:18px}
-			.grid{
-				display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch
-			}
-			.card{
-				background:var(--card);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;
-				box-shadow:var(--shadow);cursor:pointer;transition:transform .16s ease, box-shadow .16s ease;
-				border:1px solid rgba(15,23,42,0.03);
-			}
-			.card:focus{outline:2px solid rgba(0,0,0,0.06);outline-offset:2px}
-			.card:hover{transform:translateY(-6px)}
-			.card .icon{
-				font-size:24px;background:linear-gradient(135deg,var(--accent),#61d6c7);width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white
-			}
-			.card h3{margin:0;font-size:14px}
-			.card p{margin:0;color:var(--muted);font-size:12px}
-
-			/* bottom bar */
-			.bottombar{
-				position:sticky;bottom:16px;margin:0 18px;padding:10px 14px;background:linear-gradient(180deg,white,rgba(255,255,255,0.95));border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow);
-			}
-			.bottombar nav{display:flex;gap:8px}
-			.bottombar button{
-				background:transparent;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:8px;transition:all .14s ease;font-weight:600
-			}
-			.bottombar button.active{color:var(--primary);background:linear-gradient(180deg,rgba(103,80,164,0.12),rgba(103,80,164,0.06));}
-			.bottombar button:focus{outline:2px solid rgba(99,102,241,0.18);outline-offset:3px}
-
-			.helper{display:flex;align-items:center;gap:12px}
-
-			/* responsive */
-			@media (max-width:900px){
-				.grid{grid-template-columns:repeat(2,1fr)}
-			}
-			@media (max-width:480px){
-				header{padding:20px}
-				.grid{grid-template-columns:repeat(2,1fr);gap:8px}
-				.card{padding:12px}
-				.avatar{width:48px;height:48px}
-				.bottombar{margin:0 10px}
-			}
-
-			/* small toast */
-			.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;background:#101827;color:white;padding:10px 16px;border-radius:999px;box-shadow:0 6px 22px rgba(2,6,23,0.35);opacity:0;pointer-events:none;transition:opacity .18s ease}
-			.toast.show{opacity:1;pointer-events:auto}
-		</style>
+		<link rel="stylesheet" href="index.css" />
+		
 	</head>
 	<body>
 		<header>
@@ -140,7 +60,7 @@
 				</article>
 				<article class="card" tabindex="0" data-key="8">
 					<div class="icon">🎯</div>
-					<h3>hoals</h3>
+					<h3>Goals</h3>
 					<p>Track goals and milestones.</p>
 				</article>
 			</section>
@@ -157,29 +77,6 @@
 
 		<div class="toast" id="toast">Action</div>
 
-		<script>
-			// small click handler for cards and bottom buttons
-			const toast = document.getElementById('toast');
-			const showToast = (text)=>{
-				toast.textContent = text;
-				toast.classList.add('show');
-				clearTimeout(showToast.tid);
-				showToast.tid = setTimeout(()=> toast.classList.remove('show'), 2000);
-			};
-
-			document.querySelectorAll('.card').forEach(card=>{
-				const label = card.querySelector('h3').innerText;
-				card.addEventListener('click', ()=> showToast(label+' clicked'));
-				card.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }});
-			});
-
-			document.querySelectorAll('.bottombar button').forEach(btn=>{
-				btn.addEventListener('click', ()=>{
-					document.querySelectorAll('.bottombar button').forEach(b=>b.classList.remove('active'));
-					btn.classList.add('active');
-					showToast(btn.textContent.trim());
-				});
-			});
-		</script>
+		<script src="index.js"></script>
 	</body>
 </html>
